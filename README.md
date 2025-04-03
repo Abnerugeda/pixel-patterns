@@ -28,7 +28,16 @@ This open-source project not only offers an initial library of components but al
 | --- | --- |
 | ![inputs](https://github.com/user-attachments/assets/ddcdc2e5-b11f-4647-abe2-e44ffbad826f) | ![loaders](https://github.com/user-attachments/assets/c57090a7-cec2-4665-b21e-c210c73048fc) 
 
-![cards](https://github.com/user-attachments/assets/7282e2bd-b9ba-4792-8e00-d8d702960a10)
+| Cards Page | Checkboxes Page |
+| --- | --- |
+| ![cards](https://github.com/user-attachments/assets/7282e2bd-b9ba-4792-8e00-d8d702960a10) | ![pp3](https://github.com/user-attachments/assets/f0444e7d-56af-4183-968b-b0635f15d748)
+
+| Forms Page |
+| --- |
+| ![pp4](https://github.com/user-attachments/assets/5c71a6d6-5e03-47b3-953f-69f7fd30fb23)
+
+
+
 
 ## 💻 Deploy
 

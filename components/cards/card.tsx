@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { CodeBlock, dracula } from "@react-email/code-block";
 import { motion } from "framer-motion";
 import { Check, Code2, CopyIcon } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { toast } from "sonner";
 import { Star } from "../shapes";
@@ -33,6 +33,33 @@ export const Card = ({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (!isDialogOpen) return;
+
+      const dialog = document.querySelector('[role="dialog"]');
+      if (!dialog) return;
+
+      const rect = dialog.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+
+      // Increased sensitivity and immediate response
+      const rotateY = (deltaX / rect.width) * 25;
+      const rotateX = (deltaY / rect.height) * -25;
+
+      requestAnimationFrame(() => {
+        setMousePosition({ x: rotateY, y: rotateX });
+      });
+    };
+
+    window.addEventListener("mousemove", handleGlobalMouseMove);
+    return () => window.removeEventListener("mousemove", handleGlobalMouseMove);
+  }, [isDialogOpen]);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -45,6 +72,28 @@ export const Card = ({
     const rotateY = ((x - centerX) / centerX) * 10;
 
     setMousePosition({ x: rotateY, y: rotateX });
+  };
+
+  const handleDialogMouseMove = (e: React.MouseEvent) => {
+    const dialogRect = e.currentTarget.getBoundingClientRect();
+    const proximityThreshold = 100;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    const centerX = dialogRect.left + dialogRect.width / 2;
+    const centerY = dialogRect.top + dialogRect.height / 2;
+
+    const deltaX = mouseX - centerX;
+    const deltaY = mouseY - centerY;
+
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    if (distance < dialogRect.width / 2 + proximityThreshold) {
+      const rotateY = (deltaX / (dialogRect.width / 2)) * 10;
+      const rotateX = (deltaY / (dialogRect.height / 2)) * -10;
+      setMousePosition({ x: rotateY, y: rotateX });
+    }
   };
 
   const handleMouseLeave = () => {
@@ -80,10 +129,6 @@ export const Card = ({
         )}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={{
-          transform: `perspective(1000px) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
-          transition: mousePosition.x === 0 ? "transform 0.5s linear" : "none",
-        }}
       >
         <Button
           variant="link"
@@ -115,11 +160,8 @@ export const Card = ({
             transform: `perspective(2000px) translate(-50%, -50%) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
             top: "50%",
             left: "50%",
-            transition:
-              mousePosition.x === 0 ? "transform 0.5s linear" : "none",
+            transition: "none",
           }}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
         >
           <Background />
           <Star />

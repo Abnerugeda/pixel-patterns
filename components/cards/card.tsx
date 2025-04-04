@@ -83,7 +83,7 @@ export const Card = ({
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="flex flex-col items-center justify-center max-w-[850px] max-h-[650px] bg-black bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] text-white">
+        <DialogContent className="flex flex-col items-center justify-center max-w-[850px] max-h-[650px] bg-black bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] text-white overflow-hidden">
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -100,11 +100,15 @@ export const Card = ({
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.2 }}
-              className="w-[700px] max-h-[650px] overflow-y-auto custom-scrollbar my-4 mx-auto z-50"
+              className="w-[700px] max-h-[650px] overflow-y-auto custom-scrollbar my-4 mx-auto z-50 rounded-xl"
             >
               <CodeBlock
                 code={contentCode}
                 lineNumbers
+                style={{
+                  margin: "0",
+                  // padding: "400px",
+                }}
                 theme={dracula}
                 language="javascript"
               />

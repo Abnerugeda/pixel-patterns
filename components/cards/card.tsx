@@ -83,31 +83,35 @@ export const Card = ({
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="flex flex-col items-center justify-center max-w-[850px] max-h-[650px] bg-black bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] text-white overflow-hidden">
+        <DialogContent className="flex flex-col justify-center max-w-[850px] max-h-[650px] bg-black bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] text-white overflow-hidden">
+          <Star />
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col rounded-xl overflow-hidden w-full"
+            className="flex flex-col mx-auto rounded-xl overflow-hidden w-[700px] max-h-[650px] -mt-8 mb-6"
           >
-            <Star />
             <DialogHeader className="text-white mx-auto mb-5">
               <DialogTitle className="text-2xl">Code Preview</DialogTitle>
             </DialogHeader>
-
+            <div className="flex gap-2 items-center bg-[#1F1F1F] px-4 py-2 rounded-t-xl">
+              <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+              <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+              <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+            </div>
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.2 }}
-              className="w-[700px] max-h-[650px] overflow-y-auto custom-scrollbar my-4 mx-auto z-50 rounded-xl"
+              className="w-full h-full overflow-y-auto custom-scrollbar mx-auto z-50"
             >
               <CodeBlock
                 code={contentCode}
                 lineNumbers
                 style={{
                   margin: "0",
-                  // padding: "400px",
+                  borderRadius: "0",
                 }}
                 theme={dracula}
                 language="javascript"

@@ -658,7 +658,6 @@ const CardsInputs = () => {
 
 
         <style>
-  /* From Uiverse.io by WhiteNervosa */ 
   .textInputWrapper {
     position: relative;
     width: 180px;

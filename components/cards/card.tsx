@@ -31,6 +31,25 @@ export const Card = ({
 }: ContentProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    setMousePosition({ x: rotateY, y: rotateX });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePosition({ x: 0, y: 0 });
+  };
 
   const handleClick = () => {
     const contentToCopy = renderToStaticMarkup(<>{content}</>);
@@ -59,6 +78,12 @@ export const Card = ({
           `flex flex-col items-center justify-center w-[300px] h-[250px] rounded-xl relative card`,
           background ? `${background}` : "bg-[#808080]"
         )}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: `perspective(1000px) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
+          transition: mousePosition.x === 0 ? "transform 0.5s linear" : "none",
+        }}
       >
         <Button
           variant="link"
@@ -84,7 +109,18 @@ export const Card = ({
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="flex flex-col justify-center max-w-[850px] max-h-[650px] h-full w-full bg-black overflow-hidden text-white">
+        <DialogContent
+          className="flex flex-col justify-center max-w-[850px] max-h-[650px] h-full w-full bg-black overflow-hidden text-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{
+            transform: `perspective(2000px) translate(-50%, -50%) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
+            top: "50%",
+            left: "50%",
+            transition:
+              mousePosition.x === 0 ? "transform 0.5s linear" : "none",
+          }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
           <Background />
           <Star />
           <motion.div

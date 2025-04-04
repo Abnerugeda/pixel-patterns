@@ -275,7 +275,6 @@ const CardsLoaders = () => {
   </div>  
 </div>
           <style>
-          /* From Uiverse.io by andrew-demchenk0 */ 
 .pyramid-loader {
   position: relative;
   width: 300px;
@@ -540,7 +539,6 @@ const CardsLoaders = () => {
 </div>
           <style>
 
-          /* From Uiverse.io by Nawsome */ 
 .banter-loader {
   position: absolute;
   left: 50%;
@@ -1060,8 +1058,7 @@ const CardsLoaders = () => {
 	<div class="👍"></div>
 </div>
           <style>
-          /* From Uiverse.io by Pradeepsaranbishnoi */ 
-.🤚 {
+ {
   --skin-color: #E4C560;
   --tap-speed: 0.6s;
   --tap-stagger: 0.1s;

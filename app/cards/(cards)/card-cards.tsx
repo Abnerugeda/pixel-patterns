@@ -130,7 +130,6 @@ const CardCards = () => {
   </div>
 </div>
           <style>
-/* From Uiverse.io by joe-watson-sbf */ 
 .container-xzQ9p3zLsW5Y {
   color: white;
   position: relative;
@@ -362,7 +361,6 @@ const CardCards = () => {
         <div
           dangerouslySetInnerHTML={{
             __html: `
-<!-- From Uiverse.io by Yaya12085 --> 
 <div class="unique-code-editor">
   <div class="unique-header">
     <span class="unique-title">CSS</span>

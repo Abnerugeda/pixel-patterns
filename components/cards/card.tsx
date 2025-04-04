@@ -8,13 +8,14 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { CodeBlock, dracula } from "@react-email/code-block";
+import { motion } from "framer-motion";
 import { Check, Code2, CopyIcon } from "lucide-react";
 import React, { useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
-import { motion } from "framer-motion";
 import { Star } from "../shapes";
+import { Button } from "../ui/button";
+import { Background } from "../layout";
 
 interface ContentProps {
   content: React.ReactNode;
@@ -83,7 +84,8 @@ export const Card = ({
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="flex flex-col justify-center max-w-[850px] max-h-[650px] bg-black bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] text-white overflow-hidden">
+        <DialogContent className="flex flex-col justify-center max-w-[850px] max-h-[650px] h-full w-full bg-black overflow-hidden text-white">
+          <Background />
           <Star />
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
@@ -92,10 +94,10 @@ export const Card = ({
             transition={{ duration: 0.2 }}
             className="flex flex-col mx-auto rounded-xl overflow-hidden w-[700px] max-h-[650px] -mt-8 mb-6"
           >
-            <DialogHeader className="text-white mx-auto mb-5">
+            <DialogHeader className="text-white mx-auto mb-5 z-50">
               <DialogTitle className="text-2xl">Code Preview</DialogTitle>
             </DialogHeader>
-            <div className="flex gap-2 items-center bg-[#1F1F1F] px-4 py-2 rounded-t-xl">
+            <div className="flex gap-2 items-center bg-[#1F1F1F] px-4 py-2 rounded-t-xl z-50">
               <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
               <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
               <div className="w-3 h-3 rounded-full bg-[#27C93F]" />

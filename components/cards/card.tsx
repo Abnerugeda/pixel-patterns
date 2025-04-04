@@ -75,13 +75,14 @@ export const Card = ({
     <section className="mx-auto justify-center">
       <div
         className={cn(
-          `flex flex-col items-center justify-center w-[300px] h-[250px] rounded-xl relative card transition-transform duration-200 ease-linear`,
+          `flex flex-col items-center justify-center w-[300px] h-[250px] rounded-xl relative card`,
           background ? `${background}` : "bg-[#808080]"
         )}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{
           transform: `perspective(1000px) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
+          transition: mousePosition.x === 0 ? "transform 0.5s linear" : "none",
         }}
       >
         <Button
@@ -109,11 +110,13 @@ export const Card = ({
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent
-          className="flex flex-col justify-center max-w-[850px] max-h-[650px] h-full w-full bg-black overflow-hidden text-white transition-none fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="flex flex-col justify-center max-w-[850px] max-h-[650px] h-full w-full bg-black overflow-hidden text-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           style={{
             transform: `perspective(2000px) translate(-50%, -50%) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
             top: "50%",
             left: "50%",
+            transition:
+              mousePosition.x === 0 ? "transform 0.5s linear" : "none",
           }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}

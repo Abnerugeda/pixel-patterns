@@ -7,15 +7,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { CodeBlock, dracula } from "@react-email/code-block";
+import { CodeBlock, shadesOfPurple } from "@react-email/code-block";
 import { motion } from "framer-motion";
 import { Check, Code2, CopyIcon } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { toast } from "sonner";
-import { Star } from "../shapes";
-import { Button } from "../ui/button";
 import { Background } from "../layout";
+import { Geminid, Star } from "../shapes";
+import { Button } from "../ui/button";
 
 interface ContentProps {
   content: React.ReactNode;
@@ -161,8 +161,8 @@ export const Card = ({
             transition: isMouseInBoundary ? "none" : "transform 0.5s ease-out",
           }}
         >
-          <Background />
           <Star />
+          <Geminid />
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -170,8 +170,22 @@ export const Card = ({
             transition={{ duration: 0.2 }}
             className="flex flex-col mx-auto rounded-xl overflow-hidden w-[700px] max-h-[650px] -mt-8 mb-6"
           >
-            <DialogHeader className="text-white mx-auto mb-5 z-50">
-              <DialogTitle className="text-2xl">Code Preview</DialogTitle>
+            <Background />
+            <DialogHeader className="text-white mx-auto mb-5 z-50 flex w-full">
+              <DialogTitle className="text-2xl flex">
+                Code Preview
+                <Button
+                  onClick={handleClick}
+                  variant="link"
+                  className="ml-auto"
+                >
+                  {isChecked ? (
+                    <Check size={20} color={iconColor} />
+                  ) : (
+                    <CopyIcon size={20} color={iconColor} />
+                  )}
+                </Button>
+              </DialogTitle>
             </DialogHeader>
             <div className="flex gap-2 items-center bg-[#1F1F1F] px-4 py-2 rounded-t-xl z-50">
               <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
@@ -190,8 +204,11 @@ export const Card = ({
                 style={{
                   margin: "0",
                   borderRadius: "0",
+                  padding: "1rem",
+                  borderLeft: "3px solid #1F1F1F",
+                  zIndex: "50",
                 }}
-                theme={dracula}
+                theme={shadesOfPurple}
                 language="javascript"
               />
             </motion.div>

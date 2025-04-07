@@ -11,41 +11,29 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useThemeStore } from "@/store/useThemeStore";
-import { Check, ChevronsUpDown, PaintBucketIcon } from "lucide-react";
-import { useState } from "react";
-import { Button } from "./ui";
 import { cn } from "@/lib/utils";
+import { useThemeStore } from "@/store/useThemeStore";
 import { THEMES } from "@/utils/themes";
+import { Check, PaintBucketIcon } from "lucide-react";
+import Prism from "prismjs";
+import React__default, { useState } from "react";
+import { Button } from "./ui";
+import * as themes from "@react-email/code-block";
+
+type ThemeType = Record<
+  string | "base" | keyof Prism.Grammar,
+  React__default.CSSProperties
+>;
 
 export const ThemeModal = () => {
-  const [isThemeOpen, setIsThemeOpen] = useState(false);
-  const { theme, setTheme } = useThemeStore();
+  const { theme, setTheme, selectedThemeName } = useThemeStore();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
 
-  const frameworks = [
-    {
-      value: "next.js",
-      label: "Next.js",
-    },
-    {
-      value: "sveltekit",
-      label: "SvelteKit",
-    },
-    {
-      value: "nuxt.js",
-      label: "Nuxt.js",
-    },
-    {
-      value: "remix",
-      label: "Remix",
-    },
-    {
-      value: "astro",
-      label: "Astro",
-    },
-  ];
+  const handleThemeSelect = (themeName: string) => {
+    const selectedTheme = themes[themeName as keyof typeof themes];
+    setTheme(selectedTheme as ThemeType);
+    setOpen(false);
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -73,20 +61,16 @@ export const ThemeModal = () => {
                 <CommandItem
                   key={t}
                   value={t}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
-                    setTheme(currentValue);
-                    setOpen(false);
-                  }}
+                  onSelect={handleThemeSelect}
                   className={`w-full text-left px-4 py-2 hover:bg-[#051018] hover:text-blue-200 transition-colors truncate text-blue-100 custom-scrollbar ${
-                    value === t ? "bg-blue-800/40" : ""
+                    selectedThemeName === t ? "bg-blue-800/40" : ""
                   }`}
                 >
                   {t}
                   <Check
                     className={cn(
                       "ml-auto text-blue-400",
-                      value === t ? "opacity-100" : "opacity-0"
+                      selectedThemeName === t ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
@@ -97,29 +81,4 @@ export const ThemeModal = () => {
       </PopoverContent>
     </Popover>
   );
-  // <div className="flex flex-col items-center justify-center relative z-50">
-  //   <Button
-  //     onClick={() => setIsThemeOpen(!isThemeOpen)}
-  //     variant="outline"
-  //     className="ml-auto bg-gradient-to-r from-blue-900 to-blue-700 text-white border-0 hover:opacity-80 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-blue-900/50 flex items-center gap-2 px-4 py-2 relative"
-  //   >
-  //     Theme
-  //     <PaintBucketIcon size={18} className="animate-bounce" />
-  //   </Button>
-  //   {isThemeOpen && (
-  //     <div className="absolute top-full mt-2 w-48 bg-[#1F1F1F] rounded-lg shadow-lg overflow-hidden z-[50] max-h-[300px] overflow-y-auto">
-  //       {THEMES.map((t) => (
-  //         <button
-  //           key={t}
-  //           onClick={() => setTheme(t)}
-  //           className={`group flex flex-col items-center gap-1.5 p-2 rounded-lg transition-colors ${
-  //             theme === t ? "bg-base-200" : "hover:bg-base-200/50"
-  //           }`}
-  //         >
-  //           {t}
-  //         </button>
-  //       ))}
-  //     </div>
-  //   )}
-  // </div>
 };

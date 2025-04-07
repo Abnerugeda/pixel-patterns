@@ -365,11 +365,11 @@ const CardCards = () => {
   <div class="unique-header">
     <span class="unique-title">CSS</span>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="unique-icon">
-      <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+      <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
       <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
       <g id="SVGRepo_iconCarrier"> 
-        <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M6 6L18 18"></path> 
-        <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M18 6L6 18"></path> 
+        <path stroke-linecap="round" strokeWidth="2" stroke="#4C4F5A" d="M6 6L18 18"></path> 
+        <path stroke-linecap="round" strokeWidth="2" stroke="#4C4F5A" d="M18 6L6 18"></path> 
       </g>
     </svg>
   </div>
@@ -688,7 +688,7 @@ const CardCards = () => {
           <svg
             stroke-linejoin="round"
             stroke-linecap="round"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="#000000"
             fill="none"
             viewBox="0 0 24 24"
@@ -735,7 +735,7 @@ const CardCards = () => {
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
                 width="24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -759,7 +759,7 @@ const CardCards = () => {
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
                 width="24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -773,7 +773,7 @@ const CardCards = () => {
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
                 width="24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -794,7 +794,7 @@ const CardCards = () => {
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
+                strokeWidth="2"
                 viewBox="0 0 24 24"
                 width="24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -836,7 +836,7 @@ const CardCards = () => {
             >
               <path
                 d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke-linejoin="round"
                 stroke-linecap="round"
               ></path>
@@ -859,7 +859,7 @@ const CardCards = () => {
             >
               <path
                 d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke-linejoin="round"
                 stroke-linecap="round"
               ></path>
@@ -882,7 +882,7 @@ const CardCards = () => {
             >
               <path
                 d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke-linejoin="round"
                 stroke-linecap="round"
               ></path>
@@ -905,7 +905,7 @@ const CardCards = () => {
             >
               <path
                 d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke-linejoin="round"
                 stroke-linecap="round"
               ></path>

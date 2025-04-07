@@ -7,15 +7,17 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { CodeBlock, dracula } from "@react-email/code-block";
+import { useThemeStore } from "@/store/useThemeStore";
+import { CodeBlock } from "@react-email/code-block";
 import { motion } from "framer-motion";
 import { Check, Code2, CopyIcon } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { toast } from "sonner";
-import { Star } from "../shapes";
-import { Button } from "../ui/button";
 import { Background } from "../layout";
+import { Geminid, Star } from "../shapes";
+import { ThemeModal } from "../theme-modal";
+import { Button } from "../ui/button";
 
 interface ContentProps {
   content: React.ReactNode;
@@ -32,6 +34,54 @@ export const Card = ({
   const [isChecked, setIsChecked] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const [isMouseInBoundary, setIsMouseInBoundary] = useState(true);
+  const { theme } = useThemeStore();
+
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (!isDialogOpen) return;
+
+      const dialog = document.querySelector('[role="dialog"]');
+      if (!dialog) return;
+
+      const rect = dialog.getBoundingClientRect();
+
+      // Define the boundary area
+      const boundaryTop = rect.top - 50;
+      const boundaryBottom = rect.bottom + 50;
+      const boundaryLeft = rect.left - 150;
+      const boundaryRight = rect.right + 150;
+
+      // Check if mouse is outside the boundary
+      const isOutside =
+        e.clientX < boundaryLeft ||
+        e.clientX > boundaryRight ||
+        e.clientY < boundaryTop ||
+        e.clientY > boundaryBottom;
+
+      setIsMouseInBoundary(!isOutside);
+
+      if (isOutside) {
+        setMousePosition({ x: 0, y: 0 });
+        return;
+      }
+
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+
+      const rotateY = (deltaX / rect.width) * 10;
+      const rotateX = (deltaY / rect.height) * -10;
+
+      setMousePosition({ x: rotateY, y: rotateX });
+    };
+
+    window.addEventListener("mousemove", handleGlobalMouseMove);
+    return () => window.removeEventListener("mousemove", handleGlobalMouseMove);
+  }, [isDialogOpen]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -80,10 +130,6 @@ export const Card = ({
         )}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={{
-          transform: `perspective(1000px) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
-          transition: mousePosition.x === 0 ? "transform 0.5s linear" : "none",
-        }}
       >
         <Button
           variant="link"
@@ -115,14 +161,11 @@ export const Card = ({
             transform: `perspective(2000px) translate(-50%, -50%) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
             top: "50%",
             left: "50%",
-            transition:
-              mousePosition.x === 0 ? "transform 0.5s linear" : "none",
+            transition: isMouseInBoundary ? "none" : "transform 0.5s ease-out",
           }}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
         >
-          <Background />
           <Star />
+          <Geminid />
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -130,8 +173,19 @@ export const Card = ({
             transition={{ duration: 0.2 }}
             className="flex flex-col mx-auto rounded-xl overflow-hidden w-[700px] max-h-[650px] -mt-8 mb-6"
           >
-            <DialogHeader className="text-white mx-auto mb-5 z-50">
-              <DialogTitle className="text-2xl">Code Preview</DialogTitle>
+            <Background />
+            <DialogHeader className="text-white mx-auto mb-5 z-50 flex w-full flex-row items-center">
+              <DialogTitle className="text-2xl flex items-center">
+                Code Preview
+                <Button onClick={handleClick} variant="link">
+                  {isChecked ? (
+                    <Check size={20} color={iconColor} />
+                  ) : (
+                    <CopyIcon size={20} color={iconColor} />
+                  )}
+                </Button>
+              </DialogTitle>
+              <ThemeModal />
             </DialogHeader>
             <div className="flex gap-2 items-center bg-[#1F1F1F] px-4 py-2 rounded-t-xl z-50">
               <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
@@ -150,8 +204,11 @@ export const Card = ({
                 style={{
                   margin: "0",
                   borderRadius: "0",
+                  padding: "1rem",
+                  borderLeft: "3px solid #1F1F1F",
+                  zIndex: "50",
                 }}
-                theme={dracula}
+                theme={theme}
                 language="javascript"
               />
             </motion.div>

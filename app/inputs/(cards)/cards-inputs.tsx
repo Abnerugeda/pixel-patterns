@@ -269,7 +269,7 @@ const CardsInputs = () => {
           <svg
             className="size-6 absolute top-3 right-3 text-gray-500"
             stroke="currentColor"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -439,7 +439,7 @@ const CardsInputs = () => {
     >
       <path
         stroke="currentColor"
-        stroke-width="1.25"
+        strokeWidth="1.25"
         d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
       ></path>
     </svg>
@@ -882,7 +882,7 @@ const CardsInputs = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="#FFF"
                 className="w-8 h-8"
               >
@@ -918,7 +918,7 @@ const CardsInputs = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="#FFF"
                 className="w-8 h-8"
               >

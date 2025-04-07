@@ -39,12 +39,12 @@ const CardsLoaders = () => {
         <rect height="30" width="30" ry="5" rx="5"></rect>
       </clipPath>
     </defs>
-    <circle transform="rotate(-113,100,100)" stroke-linecap="round" stroke-dashoffset="439.82" stroke-dasharray="439.82 439.82" stroke-width="2" stroke="currentColor" fill="none" r="70" class="pencil__stroke"></circle>
+    <circle transform="rotate(-113,100,100)" stroke-linecap="round" stroke-dashoffset="439.82" stroke-dasharray="439.82 439.82" strokeWidth="2" stroke="currentColor" fill="none" r="70" class="pencil__stroke"></circle>
     <g transform="translate(100,100)" class="pencil__rotate">
       <g fill="none">
-			<circle transform="rotate(-90)" stroke-dashoffset="402" stroke-dasharray="402.12 402.12" stroke-width="30" stroke="hsl(223,90%,50%)" r="64" class="pencil__body1"></circle>
-			<circle transform="rotate(-90)" stroke-dashoffset="465" stroke-dasharray="464.96 464.96" stroke-width="10" stroke="hsl(223,90%,60%)" r="74" class="pencil__body2"></circle>
-			<circle transform="rotate(-90)" stroke-dashoffset="339" stroke-dasharray="339.29 339.29" stroke-width="10" stroke="hsl(223,90%,40%)" r="54" class="pencil__body3"></circle>
+			<circle transform="rotate(-90)" stroke-dashoffset="402" stroke-dasharray="402.12 402.12" strokeWidth="30" stroke="hsl(223,90%,50%)" r="64" class="pencil__body1"></circle>
+			<circle transform="rotate(-90)" stroke-dashoffset="465" stroke-dasharray="464.96 464.96" strokeWidth="10" stroke="hsl(223,90%,60%)" r="74" class="pencil__body2"></circle>
+			<circle transform="rotate(-90)" stroke-dashoffset="339" stroke-dasharray="339.29 339.29" strokeWidth="10" stroke="hsl(223,90%,40%)" r="54" class="pencil__body3"></circle>
 		</g>
 		<g transform="rotate(-90) translate(49,0)" class="pencil__eraser">
 			<g class="pencil__eraser-skew">
@@ -483,7 +483,7 @@ const CardsLoaders = () => {
           <style>
 .loading svg polyline {
   fill: none;
-  stroke-width: 3;
+  strokeWidth: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -1348,7 +1348,7 @@ const CardsLoaders = () => {
 	<svg style="--i:0;--j:0;">
 		<g id="out1">
 			<path d="M72 172C72 116.772 116.772 72 172 72C227.228 72 272 116.772 272 172C272 227.228 227.228 272 172 272C116.772 272 72 227.228 72 172ZM197.322 172C197.322 158.015 185.985 146.678 172 146.678C158.015 146.678 146.678 158.015 146.678 172C146.678 185.985 158.015 197.322 172 197.322C185.985 197.322 197.322 185.985 197.322 172Z"></path>
-			<path mask="url(#path-1-inside-1_111_3212)" stroke-miterlimit="16" stroke-width="2" stroke="#00FFFF" d="M72 172C72 116.772 116.772 72 172 72C227.228 72 272 116.772 272 172C272 227.228 227.228 272 172 272C116.772 272 72 227.228 72 172ZM197.322 172C197.322 158.015 185.985 146.678 172 146.678C158.015 146.678 146.678 158.015 146.678 172C146.678 185.985 158.015 197.322 172 197.322C185.985 197.322 197.322 185.985 197.322 172Z"></path>
+			<path mask="url(#path-1-inside-1_111_3212)" stroke-miterlimit="16" strokeWidth="2" stroke="#00FFFF" d="M72 172C72 116.772 116.772 72 172 72C227.228 72 272 116.772 272 172C272 227.228 227.228 272 172 272C116.772 272 72 227.228 72 172ZM197.322 172C197.322 158.015 185.985 146.678 172 146.678C158.015 146.678 146.678 158.015 146.678 172C146.678 185.985 158.015 197.322 172 197.322C185.985 197.322 197.322 185.985 197.322 172Z"></path>
 		</g>
 	</svg>
 
@@ -2512,7 +2512,7 @@ animation: rollingRock 2.5s cubic-bezier(.79, 0, .47, .97) infinite;
 .circle2344f {
  fill: none;
  stroke: hsl(214, 97%, 59%);
- stroke-width: 2;
+ strokeWidth: 2;
  stroke-dasharray: 1, 200;
  stroke-dashoffset: 0;
  stroke-linecap: round;

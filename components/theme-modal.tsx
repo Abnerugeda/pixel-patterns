@@ -27,23 +27,17 @@ type ThemeType = Record<
 
 export const ThemeModal = () => {
   const { setTheme, selectedThemeName } = useThemeStore();
-  const [value, setValue] = useState("");
-
+  const [value, setValue] = useState(selectedThemeName || "");
   const [open, setOpen] = useState(false);
-
-  // const handleThemeSelect = (themeName: string) => {
-  //   const selectedTheme = themes[themeName as keyof typeof themes];
-  //   setTheme(selectedTheme as ThemeType);
-  // };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="ml-auto bg-gradient-to-r from-blue-900 to-blue-700 text-white border-0 hover:opacity-80 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-blue-900/50 flex items-center gap-2 px-4 py-2"
+          className="ml-auto bg-gradient-to-r from-blue-900 to-blue-700 text-white border-0 hover:opacity-80 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-blue-900/50 flex items-center gap-2 px-4 py-2 capitalize"
         >
-          Theme
+          {value}
           <PaintBucketIcon size={18} className="animate-bounce" />
         </Button>
       </PopoverTrigger>

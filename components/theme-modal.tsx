@@ -26,14 +26,15 @@ type ThemeType = Record<
 >;
 
 export const ThemeModal = () => {
-  const { theme, setTheme, selectedThemeName } = useThemeStore();
+  const { setTheme, selectedThemeName } = useThemeStore();
+  const [value, setValue] = useState("");
+
   const [open, setOpen] = useState(false);
 
-  const handleThemeSelect = (themeName: string) => {
-    const selectedTheme = themes[themeName as keyof typeof themes];
-    setTheme(selectedTheme as ThemeType);
-    setOpen(false);
-  };
+  // const handleThemeSelect = (themeName: string) => {
+  //   const selectedTheme = themes[themeName as keyof typeof themes];
+  //   setTheme(selectedTheme as ThemeType);
+  // };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -52,8 +53,8 @@ export const ThemeModal = () => {
             placeholder="Search theme..."
             className="text-white placeholder:text-blue-400/50 [&_svg]:text-white"
           />
-          <CommandList className="bg-[#0A1929] text-white">
-            <CommandEmpty className="text-blue-400">
+          <CommandList className="bg-[#0A1929] text-white custom-scrollbar max-h-[300px] overflow-y-auto">
+            <CommandEmpty className="text-white p-2 text-sm">
               No theme found.
             </CommandEmpty>
             <CommandGroup>
@@ -61,16 +62,21 @@ export const ThemeModal = () => {
                 <CommandItem
                   key={t}
                   value={t}
-                  onSelect={handleThemeSelect}
+                  onSelect={(currentValue) => {
+                    const selectedTheme =
+                      themes[currentValue as keyof typeof themes];
+                    setValue(currentValue === value ? "" : currentValue);
+                    setTheme(selectedTheme as ThemeType);
+                  }}
                   className={`w-full text-left px-4 py-2 hover:bg-[#051018] hover:text-blue-200 transition-colors truncate text-blue-100 custom-scrollbar ${
-                    selectedThemeName === t ? "bg-blue-800/40" : ""
+                    value === t ? "bg-blue-800/40" : ""
                   }`}
                 >
                   {t}
                   <Check
                     className={cn(
                       "ml-auto text-blue-400",
-                      selectedThemeName === t ? "opacity-100" : "opacity-0"
+                      value === t ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

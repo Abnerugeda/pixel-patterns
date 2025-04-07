@@ -36,7 +36,7 @@ export const Card = ({
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const [isMouseInBoundary, setIsMouseInBoundary] = useState(true);
-  const { theme, setTheme } = useThemeStore();
+  const { theme } = useThemeStore();
 
   useEffect(() => {
     const handleGlobalMouseMove = (e: MouseEvent) => {

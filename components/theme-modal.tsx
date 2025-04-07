@@ -62,7 +62,7 @@ export const ThemeModal = () => {
                     setValue(currentValue === value ? "" : currentValue);
                     setTheme(selectedTheme as ThemeType);
                   }}
-                  className={`w-full text-left px-4 py-2 hover:bg-[#051018] hover:text-blue-200 transition-colors truncate text-blue-100 custom-scrollbar ${
+                  className={`w-full text-left px-4 py-2 hover:bg-[#051018] hover:text-blue-200 transition-colors truncate text-blue-100 custom-scrollbar capitalize ${
                     value === t ? "bg-blue-800/40" : ""
                   }`}
                 >

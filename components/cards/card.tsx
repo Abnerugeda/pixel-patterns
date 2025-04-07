@@ -33,6 +33,8 @@ export const Card = ({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  const [isMouseInBoundary, setIsMouseInBoundary] = useState(true);
+
   useEffect(() => {
     const handleGlobalMouseMove = (e: MouseEvent) => {
       if (!isDialogOpen) return;
@@ -41,30 +43,37 @@ export const Card = ({
       if (!dialog) return;
 
       const rect = dialog.getBoundingClientRect();
+
+      // Define the boundary area
+      const boundaryTop = rect.top - 50;
+      const boundaryBottom = rect.bottom + 50;
+      const boundaryLeft = rect.left - 150;
+      const boundaryRight = rect.right + 150;
+
+      // Check if mouse is outside the boundary
+      const isOutside =
+        e.clientX < boundaryLeft ||
+        e.clientX > boundaryRight ||
+        e.clientY < boundaryTop ||
+        e.clientY > boundaryBottom;
+
+      setIsMouseInBoundary(!isOutside);
+
+      if (isOutside) {
+        setMousePosition({ x: 0, y: 0 });
+        return;
+      }
+
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
 
-      // Limit the area where the hover effect is active
-      const hoverBoundary = 100; // pixels from the dialog edges
-      const mouseX = Math.max(
-        rect.left - hoverBoundary,
-        Math.min(e.clientX, rect.right + hoverBoundary)
-      );
-      const mouseY = Math.max(
-        rect.top - hoverBoundary,
-        Math.min(e.clientY, rect.bottom + hoverBoundary)
-      );
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
 
-      const deltaX = mouseX - centerX;
-      const deltaY = mouseY - centerY;
+      const rotateY = (deltaX / rect.width) * 10;
+      const rotateX = (deltaY / rect.height) * -10;
 
-      // Reduced rotation angles for more subtle effect
-      const rotateY = (deltaX / (rect.width + hoverBoundary * 2)) * 15;
-      const rotateX = (deltaY / (rect.height + hoverBoundary * 2)) * -15;
-
-      requestAnimationFrame(() => {
-        setMousePosition({ x: rotateY, y: rotateX });
-      });
+      setMousePosition({ x: rotateY, y: rotateX });
     };
 
     window.addEventListener("mousemove", handleGlobalMouseMove);
@@ -149,7 +158,7 @@ export const Card = ({
             transform: `perspective(2000px) translate(-50%, -50%) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
             top: "50%",
             left: "50%",
-            transition: "none",
+            transition: isMouseInBoundary ? "none" : "transform 0.5s ease-out",
           }}
         >
           <Background />

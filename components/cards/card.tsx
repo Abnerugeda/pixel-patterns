@@ -9,13 +9,22 @@ import {
 import { cn } from "@/lib/utils";
 import { CodeBlock, shadesOfPurple } from "@react-email/code-block";
 import { motion } from "framer-motion";
-import { Check, Code2, CopyIcon } from "lucide-react";
+import {
+  Check,
+  CloudMoonRain,
+  Code2,
+  CopyIcon,
+  PaintBucket,
+  PaintBucketIcon,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { toast } from "sonner";
 import { Background } from "../layout";
 import { Geminid, Star } from "../shapes";
 import { Button } from "../ui/button";
+import { THEMES } from "@/utils/themes";
+import { ThemeModal } from "../theme-modal";
 
 interface ContentProps {
   content: React.ReactNode;
@@ -34,6 +43,20 @@ export const Card = ({
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const [isMouseInBoundary, setIsMouseInBoundary] = useState(true);
+
+  const [isThemeOpen, setIsThemeOpen] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("codeTheme") || "shadesOfPurple";
+    }
+    return "shadesOfPurple";
+  });
+
+  const handleThemeChange = (theme: string) => {
+    setCurrentTheme(theme);
+    localStorage.setItem("codeTheme", theme);
+    setIsThemeOpen(false);
+  };
 
   useEffect(() => {
     const handleGlobalMouseMove = (e: MouseEvent) => {
@@ -171,14 +194,10 @@ export const Card = ({
             className="flex flex-col mx-auto rounded-xl overflow-hidden w-[700px] max-h-[650px] -mt-8 mb-6"
           >
             <Background />
-            <DialogHeader className="text-white mx-auto mb-5 z-50 flex w-full">
-              <DialogTitle className="text-2xl flex">
+            <DialogHeader className="text-white mx-auto mb-5 z-50 flex w-full flex-row items-center">
+              <DialogTitle className="text-2xl flex items-center">
                 Code Preview
-                <Button
-                  onClick={handleClick}
-                  variant="link"
-                  className="ml-auto"
-                >
+                <Button onClick={handleClick} variant="link">
                   {isChecked ? (
                     <Check size={20} color={iconColor} />
                   ) : (
@@ -186,6 +205,22 @@ export const Card = ({
                   )}
                 </Button>
               </DialogTitle>
+              <ThemeModal />
+              {/* {isThemeOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-[#1F1F1F] rounded-lg shadow-lg overflow-hidden z-50 max-h-[300px] overflow-y-auto">
+                  {THEMES.map((theme: any) => (
+                    <button
+                      key={theme}
+                      onClick={() => handleThemeChange(theme)}
+                      className={`w-full text-left px-4 py-2 hover:bg-blue-900/50 transition-colors ${
+                        currentTheme === theme ? "bg-blue-900" : ""
+                      }`}
+                    >
+                      {theme}
+                    </button>
+                  ))}
+                </div>
+              )} */}
             </DialogHeader>
             <div className="flex gap-2 items-center bg-[#1F1F1F] px-4 py-2 rounded-t-xl z-50">
               <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />

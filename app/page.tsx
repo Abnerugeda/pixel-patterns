@@ -15,7 +15,7 @@ export default function Home() {
       <Star />
       <Geminid />
       <div className="max-w-[600px] flex flex-col items-center justify-center gap-y-7 text-center">
-        <div className="w-full -mt-10">
+        <div className="w-full h-[330px] -mt-10">
           <Spline scene="https://prod.spline.design/cAuIoDp8ZpbIsUKt/scene.splinecode" />
         </div>
 

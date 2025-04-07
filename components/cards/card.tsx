@@ -44,12 +44,23 @@ export const Card = ({
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
 
-      const deltaX = e.clientX - centerX;
-      const deltaY = e.clientY - centerY;
+      // Limit the area where the hover effect is active
+      const hoverBoundary = 100; // pixels from the dialog edges
+      const mouseX = Math.max(
+        rect.left - hoverBoundary,
+        Math.min(e.clientX, rect.right + hoverBoundary)
+      );
+      const mouseY = Math.max(
+        rect.top - hoverBoundary,
+        Math.min(e.clientY, rect.bottom + hoverBoundary)
+      );
 
-      // Increased sensitivity and immediate response
-      const rotateY = (deltaX / rect.width) * 25;
-      const rotateX = (deltaY / rect.height) * -25;
+      const deltaX = mouseX - centerX;
+      const deltaY = mouseY - centerY;
+
+      // Reduced rotation angles for more subtle effect
+      const rotateY = (deltaX / (rect.width + hoverBoundary * 2)) * 15;
+      const rotateX = (deltaY / (rect.height + hoverBoundary * 2)) * -15;
 
       requestAnimationFrame(() => {
         setMousePosition({ x: rotateY, y: rotateX });
@@ -72,28 +83,6 @@ export const Card = ({
     const rotateY = ((x - centerX) / centerX) * 10;
 
     setMousePosition({ x: rotateY, y: rotateX });
-  };
-
-  const handleDialogMouseMove = (e: React.MouseEvent) => {
-    const dialogRect = e.currentTarget.getBoundingClientRect();
-    const proximityThreshold = 100;
-
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-
-    const centerX = dialogRect.left + dialogRect.width / 2;
-    const centerY = dialogRect.top + dialogRect.height / 2;
-
-    const deltaX = mouseX - centerX;
-    const deltaY = mouseY - centerY;
-
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-    if (distance < dialogRect.width / 2 + proximityThreshold) {
-      const rotateY = (deltaX / (dialogRect.width / 2)) * 10;
-      const rotateX = (deltaY / (dialogRect.height / 2)) * -10;
-      setMousePosition({ x: rotateY, y: rotateX });
-    }
   };
 
   const handleMouseLeave = () => {

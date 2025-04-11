@@ -4,3 +4,4 @@ export * from "./cubic";
 export * from "./geminid";
 export * from "./Meteor";
 export * from "./star";
+export * from "./sliceMatrix";

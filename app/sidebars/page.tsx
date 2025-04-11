@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/layout";
 import { SliceMatrix, Geminid, Star } from "@/components/shapes";
+import CardsSidebars from "./(cards)/cards-sidebars";
 
 
 const Sidebars = () => {
@@ -12,7 +13,7 @@ const Sidebars = () => {
         title="Sidebars"
         description="Explore a collection of minimal and efficient loader components designed to enhance user experience in any web project. Easily copy and use with just one click."
       />
-      
+      <CardsSidebars/>
     </>
   );
 };
